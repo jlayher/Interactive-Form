@@ -3,8 +3,8 @@ John Layher's JavaScript Project 3
 */
 
 //Put the first field in the focus state
-
-
+const name = document.getElementById('#name');
+name.focus();
 //Add an "Other" option to Job Roles Section
 
 
@@ -32,4 +32,3 @@ John Layher's JavaScript Project 3
     //Program one of your error messages so that more info is provided depending on the error
   //Real-Time Error messages
     //Rather than an error message on submit, check for errors as they are being input
-    
