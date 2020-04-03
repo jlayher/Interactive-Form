@@ -3,6 +3,7 @@ John Layher's JavaScript Project 3
 */
 
 //Put the first field in the focus state
+document.getElementById('name').focus();
 
 
 //Add an "Other" option to Job Roles Section
