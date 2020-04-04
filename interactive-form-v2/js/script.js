@@ -21,6 +21,27 @@ jobSelect.addEventListener('change', (event) => {
 
 //T-Shirt Section
 
+//Onload, update "Design" and "Color" fields so the user selects a theme before color
+document.querySelector("#design option").style.display = 'none';
+
+  //hide the "select theme" `option` in the design menu
+
+  //update the "Color" field to read "Please select a T-Shirt theme"
+
+  //Hide the colors in the "color" drop down menu
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Activity Section
   //Creating an element to display total activity cost
