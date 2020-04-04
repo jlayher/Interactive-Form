@@ -5,8 +5,18 @@ John Layher's JavaScript Project 3
 //Put the first field in the focus state
 document.getElementById('name').focus();
 
-
-//Add an "Other" option to Job Roles Section
+//Add an "Other" option to Job Roles Section(in HTML) and Hide it on Page Load
+const otherTextBox = document.getElementById('other-title');
+otherTextBox.style.display= "none";
+//Show the "Other" text field when "other" is selected in the Job Roles menu
+const jobSelect = document.getElementById('title');
+jobSelect.addEventListener('change', (event) => {
+  if (event.target.value === "other") {
+    otherTextBox.style.display = 'block';
+  } else {
+    otherTextBox.style.display = 'none';
+  }
+});
 
 
 //T-Shirt Section
