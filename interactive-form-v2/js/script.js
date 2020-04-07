@@ -26,7 +26,7 @@ jobSelect.addEventListener('change', (event) => {
 const colorField = document.querySelector('#color');
 const designField = document.querySelector('#design');
 //hide the "select theme" `option` in the design menu
-//may consider using .style.display = 'none'; instead of style.display='none'
+    //may consider using .style.display = 'none'; instead of style.display='none'
 document.querySelector("#design option").hidden=true;
   //update the "Color" field to read "Please select a T-Shirt theme"
 const selectShirtOp = document.createElement('option');
@@ -38,6 +38,22 @@ for (let i = 0; i < allColorOptions.length; i++) {
   allColorOptions[i].hidden = true;
   selectShirtOp.selected = true;
 };
+
+
+/*Rethink what was previously written below
+Ill need to create a change event listener on the design menu's 'select' element
+Make Conditional:
+  if "js puns" is selected
+    hide the 3 "heart js" option elements in the Color menu
+    show the 3 js puns options
+    update the Color field to the first available color.
+      ?Use the select method like selectShirtOp.selected = true;?
+  if "heart js" is selected
+    hide the 3 "js puns" options
+    show the 3 "heart js" options
+    update Color field to the first available color
+*/
+
 
 
 
