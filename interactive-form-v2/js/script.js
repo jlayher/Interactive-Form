@@ -26,7 +26,7 @@ jobSelect.addEventListener('change', (event) => {
 const colorField = document.querySelector('#color');
 const designField = document.querySelector('#design');
 //hide the "select theme" `option` in the design menu
-    //may consider using .style.display = 'none'; instead of style.display='none'
+    //may consider using .style.display = 'none'; instead of .hidden=true
 document.querySelector("#design option").hidden=true;
   //update the "Color" field to read "Please select a T-Shirt theme"
 const selectShirtOp = document.createElement('option');
@@ -39,33 +39,34 @@ for (let i = 0; i < allColorOptions.length; i++) {
   selectShirtOp.selected = true;
 };
 
+//At the begining of writing this code, the color option has changed.
+//Be sure that the Color menu's value is "Please select a T-Shirt theme" on load
 
-/*Rethink what was previously written below
-Ill need to create a change event listener on the design menu's 'select' element
-Make Conditional:
-  if "js puns" is selected
-    hide the 3 "heart js" option elements in the Color menu
-    show the 3 js puns options
-    update the Color field to the first available color.
-      ?Use the select method like selectShirtOp.selected = true;?
-  if "heart js" is selected
-    hide the 3 "js puns" options
-    show the 3 "heart js" options
-    update Color field to the first available color
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
+designField.addEventListener('change', (event) => {
+    if (event.target.value === "js puns") {
+      //hide heart options
+          document.querySelector('[value=tomato]').hidden= true;
+          document.querySelector('[value=steelblue]').hidden= true;
+          document.querySelector('[value=dimgrey]').hidden= true;
+      //show puns options
+          document.querySelector('[value=cornflowerblue]').hidden= false;
+          document.querySelector('[value=darkslategrey]').hidden= false;
+          document.querySelector('[value=gold]').hidden= false;
+      //update the Color field to the first available color
+          document.querySelector("[value='cornflowerblue']").selected=true;
+    }else if(event.target.value === "heart js"){
+      //hide pun options
+          document.querySelector('[value=cornflowerblue]').hidden= true;
+          document.querySelector('[value=darkslategrey]').hidden= true;
+          document.querySelector('[value=gold]').hidden= true;
+      //show heart options
+          document.querySelector('[value=tomato]').hidden= false;
+          document.querySelector('[value=steelblue]').hidden= false;
+          document.querySelector('[value=dimgrey]').hidden= false;
+      //update the Color field to the first available color
+      document.querySelector("[value='tomato']").selected= true;
+    }
+});
 
 
 
