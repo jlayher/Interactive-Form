@@ -65,12 +65,50 @@ designField.addEventListener('change', (event) => {
     }
 });
 
-
-
 //Activity Section
-  //Creating an element to display total activity cost
+  //Create an element to display total activity cost
+    //create a DOM element and store in a global variable
+    //append it to the .activities section
+    //create a global variable to store total activity cost and initially set to 0
+
+    //select the activities field and store in global var
+const activitiesField = document.querySelector('.activities');
+    //select all of the activity checkbox inputs and store in global variable
+const checkboxes = document.querySelectorAll('.activities input');
+    //declare variable cost=0 to act as total counter
+let cost = 0;
+    //create span element and assign its text content to "Total: + var cost"
+let totalCostSpan = document.createElement('span');
+totalCostSpan.textContent = "Total:" + " $" + cost;
+    //append totalCost to activities section
+document.querySelector('.activities').append(totalCostSpan);
+
   //Listening for changes in the activity Section
-  //Updating andDisplaying the total activity cost
+
+activitiesField.addEventListener('change', (event) => {
+  let clicked = event.target;
+  let clickedCost = parseInt(clicked.getAttribute('data-cost'));
+  if (clicked.checked) {
+    cost += clickedCost;
+  }else{
+    cost -= clickedCost;
+  }
+  totalCostSpan.textContent = "Total:" + " $" + cost;
+  //disable conflicting activities
+  let clickedDayTime = clicked.getAttribute('data-day-and-time');
+  for(let i = 0; i<checkboxes.length; i++){
+    let checkboxCurrent = checkboxes[i];
+    if(checkboxCurrent.getAttribute('data-day-and-time')===clickedDayTime && checkboxCurrent !== clicked) {
+      if(clicked.checked){
+        checkboxCurrent.disabled=true;
+      }else{
+        checkboxCurrent.disabled=false;
+      }
+    }
+  }
+});
+
+  //Updating and Displaying the total activity cost
   //Disabling Conflicting Events
 
 
