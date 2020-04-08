@@ -21,12 +21,11 @@ jobSelect.addEventListener('change', (event) => {
 
 //T-Shirt Section
 
-//Onload, update "Design" and "Color" fields so the user selects a theme before color
-//declare global variables
-const colorField = document.querySelector('#color');
+  //Onload, update "Design" and "Color" fields so the user selects a theme before color
+    //declare global variables
 const designField = document.querySelector('#design');
-//hide the "select theme" `option` in the design menu
-    //may consider using .style.display = 'none'; instead of .hidden=true
+const colorField = document.querySelector('#color');
+  //hide the "select theme" `option` in the design menu
 document.querySelector("#design option").hidden=true;
   //update the "Color" field to read "Please select a T-Shirt theme"
 const selectShirtOp = document.createElement('option');
@@ -39,9 +38,7 @@ for (let i = 0; i < allColorOptions.length; i++) {
   selectShirtOp.selected = true;
 };
 
-//At the begining of writing this code, the color option has changed.
-//Be sure that the Color menu's value is "Please select a T-Shirt theme" on load
-
+//When a theme is selected, show available color options only
 designField.addEventListener('change', (event) => {
     if (event.target.value === "js puns") {
       //hide heart options
