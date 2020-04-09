@@ -108,15 +108,67 @@ activitiesField.addEventListener('change', (event) => {
   }
 });
 
-  //Updating and Displaying the total activity cost
-  //Disabling Conflicting Events
-
 
 //Payment Section
 
+  //hide the "select payment" option
+document.querySelector('option[value="select method"]').hidden=true;
+  //hide paypal and bitcoin options
+document.querySelector('#paypal').hidden=true;
+document.querySelector('#bitcoin').hidden=true;
+  //select the credit card option on load
+document.querySelector('#credit-card').selected=true;
+  //get value of the payment select element and store in variable
+const payment = document.getElementById('payment');
 
+  /*if value of payment is equal to 'credit card',
+  set credit card payment section to show, and hide the other 2 options
+  repeat for bitcoin and paypal*/
+payment.addEventListener('change', (event) => {
+  if (event.target.value==='credit card'){
+    document.querySelector('#paypal').hidden=true;
+    document.querySelector('#bitcoin').hidden=true;
+    document.querySelector('#credit-card').hidden=false;
+  }else if(event.target.value==='bitcoin'){
+    document.querySelector('#paypal').hidden=true;
+    document.querySelector('#credit-card').hidden=true;
+    document.querySelector('#bitcoin').hidden=false;
+  }else if(event.target.value==='paypal'){
+    document.querySelector('#bitcoin').hidden=true;
+    document.querySelector('#credit-card').hidden=true;
+    document.querySelector('#paypal').hidden=false;
+}});
 
 //Form Validation and Validation Messages
+
+  //create separate validation functions for each of the required form fields/sections
+    //creating each validator function
+      /*before starting, create and append an element to the DOM near the
+      specific input or section, and give it some friendly error message.
+      */
+      //use a conditional to check if input value meets the required regex
+        //if criteria are NOT met
+          //set newDOMelement.hidden=false
+          //return false
+        //if criteria ARE met,
+          //set newDOMelement.hidden=true
+          //return true
+
+  //Name
+  //email
+  //activity section
+  //Credit Card Number (only validated if payment method is 'credit card')
+  //Zip Code (only validated if payment method is 'credit card')
+  //CVV (only validated if payment method is 'credit card')
+
+
+  //Create a single master validation function
+
+
+
+
+
+
 
 
 //Extra Credit
