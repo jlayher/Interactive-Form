@@ -130,13 +130,17 @@ option {
 /* =================================
   Error Styles
 ==================================== */
-label[for] span,
+
 .error {
   float: right;
   color: red;
   border: 2px outset grey;
 }
-
+.crediterror {
+  float: right;
+  color: red;
+  border: 2px outset grey;
+}
 
 /* =================================
   Page Styles

@@ -156,6 +156,7 @@ const name = document.querySelector('#name');
 const nameError = document.createElement('span');
 nameError.textContent = "Please enter your name";
 document.querySelector('label[for="name"]').append(nameError);
+nameError.classList.add('error');
     //set the error message .hidden=true initially
 nameError.hidden=true;
     //validation:  the name field can't be blank
@@ -174,7 +175,6 @@ const nameValidator = () => {
 }
 
   //email
-
     //select #name and declare name variable
 const email = document.querySelector('#mail');
     //regex for testing email
@@ -183,6 +183,7 @@ const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const emailError = document.createElement('span');
 emailError.textContent = "Please provide a valid email address";
 document.querySelector('label[for="mail"]').append(emailError);
+emailError.classList.add('error');
 emailError.hidden=true;
     //email validator function
 const emailValidator = () => {
@@ -197,18 +198,12 @@ const emailValidator = () => {
     return false;
   }
 }
-
   //activity section
-    //user must select AT LEAST 1 checkbox in the form
-    //activitiesField already declared
-    //create and append an error message to the DOM
 const activitiesError = document.createElement('span');
 activitiesError.textContent = "Please select at least one activity";
 document.querySelector('.activities legend').append(activitiesError);
 activitiesError.classList.add('error');
 activitiesError.hidden=true;
-
-
     //activities validator function
 const activitiesValidator = () => {
   let activitiesChecked=0;
@@ -226,30 +221,63 @@ const activitiesValidator = () => {
     }
 }
 
-//creating each validator function
-  /*before starting, create and append an element to the DOM near the
-  specific input or section, and give it some friendly error message.
-  */
-  //use a conditional to check if input value meets the required regex
-    //if criteria are NOT met
-      //set newDOMelement.hidden=false
-      //return false
-    //if criteria ARE met,
-      //set newDOMelement.hidden=true
-      //return true
-
-
-
-
   //IF CREDIT CARD SELECTED
     //Credit Card Number
       //only accept a number between 13-16 digits
 
-    //Zip Code
-      //only accept a 5-digit Number
+//create and append cardNumber error message
+const cardNumberError = document.createElement('span');
+cardNumberError.textContent = "Please enter a valid credit card number (13-16 digits)";
+document.querySelector('label[for="payment"]').append(cardNumberError);
+cardNumberError.classList.add('crediterror');
+cardNumberError.hidden=true;
 
-    //CVV (only validated if payment method is 'credit card')
-      //should only accept a number 3 digits long
+
+//global variables to select credit card inputs
+const cardNumberInput = document.getElementById('cc-num');
+const zipInput = document.getElementById('zip');
+const cvvInput = document.getElementById('cvv');
+
+//cardNumber Regex
+const cardNumberRegex= /^\d{13,16}$/;
+//cardNumber validator function
+const cardNumberValidator = () => {
+  let cardNumberValue = cardNumberInput.value;
+  if(cardNumberRegex.test(cardNumberValue)){
+    cardNumberInput.style.borderColor = "white";
+    cardNumberError.hidden=true;
+    return true;
+  }else{
+    cardNumberInput.style.borderColor = "red";
+    cardNumberError.hidden=false;
+    return false;
+  }
+}
+//create and append zip code error message
+const zipError = document.createElement('span');
+zipError.textContent = "Please enter a valid zip code (5 digits)";
+document.querySelector('label[for="payment"]').append(zipError);
+zipError.classList.add('crediterror');
+zipError.hidden=true;
+
+//Zip Code Regex
+const zipRegex= /^\d{5}$/;
+//Zip Code validator function
+const zipValidator = () => {
+  let zipValue = zipInput.value;
+  if(zipRegex.test(zipValue)){
+    zipInput.style.borderColor = "white";
+    zipError.hidden=true;
+    return true;
+  }else{
+    zipInput.style.borderColor = "red";
+    zipError.hidden=false;
+    return false;
+  }
+}
+
+
+
 
   //Create a single master validation function
     //call validator functions
@@ -268,6 +296,16 @@ document.querySelector('form').addEventListener('submit', (e) => {
   if (!activitiesValidator()){
     e.preventDefault();
     console.log("activities validator prevented submission");
+  }
+  cardNumberValidator();
+  if (!cardNumberValidator()){
+    e.preventDefault();
+    console.log("cardNumber validator prevented submission");
+  }
+  zipValidator();
+  if (!zipValidator()){
+    e.preventDefault();
+    console.log("zip code validator prevented submission");
   }
 });
 
