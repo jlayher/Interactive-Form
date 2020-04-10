@@ -225,18 +225,18 @@ const activitiesValidator = () => {
     //Credit Card Number
       //only accept a number between 13-16 digits
 
+
+//global variables to select credit card inputs
+const cardNumberInput = document.getElementById('cc-num');
+const zipInput = document.getElementById('zip');
+const cvvInput = document.getElementById('cvv');
+
 //create and append cardNumber error message
 const cardNumberError = document.createElement('span');
 cardNumberError.textContent = "Please enter a valid credit card number (13-16 digits)";
 document.querySelector('label[for="payment"]').append(cardNumberError);
 cardNumberError.classList.add('crediterror');
 cardNumberError.hidden=true;
-
-
-//global variables to select credit card inputs
-const cardNumberInput = document.getElementById('cc-num');
-const zipInput = document.getElementById('zip');
-const cvvInput = document.getElementById('cvv');
 
 //cardNumber Regex
 const cardNumberRegex= /^\d{13,16}$/;
@@ -253,6 +253,7 @@ const cardNumberValidator = () => {
     return false;
   }
 }
+
 //create and append zip code error message
 const zipError = document.createElement('span');
 zipError.textContent = "Please enter a valid zip code (5 digits)";
@@ -276,8 +277,28 @@ const zipValidator = () => {
   }
 }
 
+//create and append CVV error message
+const cvvError = document.createElement('span');
+cvvError.textContent = "Please enter a valid CVV (3 digits)";
+document.querySelector('label[for="payment"]').append(cvvError);
+cvvError.classList.add('crediterror');
+cvvError.hidden=true;
 
-
+//CVV Regex
+const cvvRegex= /^\d{3}$/;
+//CVV validator function
+const cvvValidator = () => {
+  let cvvValue = cvvInput.value;
+  if(cvvRegex.test(cvvValue)){
+    cvvInput.style.borderColor = "white";
+    cvvError.hidden=true;
+    return true;
+  }else{
+    cvvInput.style.borderColor = "red";
+    cvvError.hidden=false;
+    return false;
+  }
+}
 
   //Create a single master validation function
     //call validator functions
@@ -297,15 +318,22 @@ document.querySelector('form').addEventListener('submit', (e) => {
     e.preventDefault();
     console.log("activities validator prevented submission");
   }
-  cardNumberValidator();
-  if (!cardNumberValidator()){
-    e.preventDefault();
-    console.log("cardNumber validator prevented submission");
-  }
-  zipValidator();
-  if (!zipValidator()){
-    e.preventDefault();
-    console.log("zip code validator prevented submission");
+  if(payment.value==='credit card'){
+    cardNumberValidator();
+    if (!cardNumberValidator()){
+      e.preventDefault();
+      console.log("cardNumber validator prevented submission");
+    }
+    zipValidator();
+    if (!zipValidator()){
+      e.preventDefault();
+      console.log("zip code validator prevented submission");
+    }
+    cvvValidator();
+    if (!cvvValidator()){
+      e.preventDefault();
+      console.log("cvv validator prevented submission");
+    }
   }
 });
 
