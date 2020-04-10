@@ -150,25 +150,96 @@ payment.addEventListener('change', (event) => {
           //return true
 
   //Name
+    //select #name and declare name variable
+const name = document.querySelector('#name');
+    //create and append an error message to the DOM
+const nameError = document.createElement('span');
+nameError.textContent = "Please enter your name";
+document.querySelector('label[for="name"]').append(nameError);
+    //set the error message .hidden=true initially
+nameError.hidden=true;
     //validation:  the name field can't be blank
 const nameValidator = () => {
   let nameVal = name.value;
   if (nameVal.length > 0) {
+    //show/hide warning and chage border colors
     name.style.borderColor = "white";
+    nameError.hidden=true;
     return true;
   }else{
     name.style.borderColor = "red";
+    nameError.hidden=false;
     return false;
   }
 }
 
   //email
-    //validation:  must be validly formatted email.
-      /*(starts with)1 or more word characters, @,
-      1 or more word characters, ., at least 3?? word characters(ends with) */
+
+    //select #name and declare name variable
+const email = document.querySelector('#mail');
+    //regex for testing email
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    //create and append an error message to the DOM
+const emailError = document.createElement('span');
+emailError.textContent = "Please provide a valid email address";
+document.querySelector('label[for="mail"]').append(emailError);
+emailError.hidden=true;
+    //email validator function
+const emailValidator = () => {
+  let emailVal = email.value;
+  if(emailRegex.test(emailVal)){
+    email.style.borderColor = "white";
+    emailError.hidden=true;
+    return true;
+  }else{
+    email.style.borderColor = "red";
+    emailError.hidden=false;
+    return false;
+  }
+}
 
   //activity section
     //user must select AT LEAST 1 checkbox in the form
+    //activitiesField already declared
+    //create and append an error message to the DOM
+const activitiesError = document.createElement('span');
+activitiesError.textContent = "Please select at least one activity";
+document.querySelector('.activities legend').append(activitiesError);
+activitiesError.classList.add('error');
+activitiesError.hidden=true;
+
+
+    //activities validator function
+const activitiesValidator = () => {
+  let activitiesChecked=0;
+  const allCheckboxes = document.querySelectorAll("input[type='checkbox']");
+  for(let i=0; i<allCheckboxes.length; i++){
+    if(allCheckboxes[i].checked){
+      activitiesChecked += 1;
+    }}
+    if(activitiesChecked>0){
+      activitiesError.hidden=true;
+      return true;
+    }else{
+      activitiesError.hidden=false;
+      return false;
+    }
+}
+
+//creating each validator function
+  /*before starting, create and append an element to the DOM near the
+  specific input or section, and give it some friendly error message.
+  */
+  //use a conditional to check if input value meets the required regex
+    //if criteria are NOT met
+      //set newDOMelement.hidden=false
+      //return false
+    //if criteria ARE met,
+      //set newDOMelement.hidden=true
+      //return true
+
+
+
 
   //IF CREDIT CARD SELECTED
     //Credit Card Number
@@ -183,8 +254,21 @@ const nameValidator = () => {
   //Create a single master validation function
     //call validator functions
 document.querySelector('form').addEventListener('submit', (e) => {
-
-
+  nameValidator();
+  if (!nameValidator()){
+    e.preventDefault();
+    console.log("name validator prevented submission");
+  }
+  emailValidator();
+  if (!emailValidator()){
+    e.preventDefault();
+    console.log("email validator prevented submission");
+  }
+  activitiesValidator();
+  if (!activitiesValidator()){
+    e.preventDefault();
+    console.log("activities validator prevented submission");
+  }
 });
 
 
@@ -196,7 +280,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
 //Extra Credit
   //T-Shirt Section
     //Hide the color label and select menu until a design has been selected
-  //Conditional Ettor Messages
+  //Conditional Error Messages
     //Program one of your error messages so that more info is provided depending on the error
   //Real-Time Error messages
     //Rather than an error message on submit, check for errors as they are being input
