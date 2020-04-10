@@ -7,14 +7,14 @@ document.getElementById('name').focus();
 
 //Add an "Other" option to Job Roles Section(in HTML) and Hide it on Page Load
 const otherTextBox = document.getElementById('other-title');
-otherTextBox.style.display= "none";
+otherTextBox.hidden = true;
 //Show the "Other" text field when "other" is selected in the Job Roles menu
 const jobSelect = document.getElementById('title');
 jobSelect.addEventListener('change', (event) => {
   if (event.target.value === "other") {
-    otherTextBox.style.display = 'block';
+    otherTextBox.hidden = false;
   } else {
-    otherTextBox.style.display = 'none';
+    otherTextBox.hidden = true;
   }
 });
 
@@ -66,10 +66,6 @@ designField.addEventListener('change', (event) => {
 });
 
 //Activity Section
-  //Create an element to display total activity cost
-    //create a DOM element and store in a global variable
-    //append it to the .activities section
-    //create a global variable to store total activity cost and initially set to 0
 
     //select the activities field and store in global var
 const activitiesField = document.querySelector('.activities');
@@ -84,7 +80,6 @@ totalCostSpan.textContent = "Total:" + " $" + cost;
 document.querySelector('.activities').append(totalCostSpan);
 
   //Listening for changes in the activity Section
-
 activitiesField.addEventListener('change', (event) => {
   let clicked = event.target;
   let clickedCost = parseInt(clicked.getAttribute('data-cost'));
@@ -155,15 +150,42 @@ payment.addEventListener('change', (event) => {
           //return true
 
   //Name
-  //email
-  //activity section
-  //Credit Card Number (only validated if payment method is 'credit card')
-  //Zip Code (only validated if payment method is 'credit card')
-  //CVV (only validated if payment method is 'credit card')
+    //validation:  the name field can't be blank
+const nameValidator = () => {
+  let nameVal = name.value;
+  if (nameVal.length > 0) {
+    name.style.borderColor = "white";
+    return true;
+  }else{
+    name.style.borderColor = "red";
+    return false;
+  }
+}
 
+  //email
+    //validation:  must be validly formatted email.
+      /*(starts with)1 or more word characters, @,
+      1 or more word characters, ., at least 3?? word characters(ends with) */
+
+  //activity section
+    //user must select AT LEAST 1 checkbox in the form
+
+  //IF CREDIT CARD SELECTED
+    //Credit Card Number
+      //only accept a number between 13-16 digits
+
+    //Zip Code
+      //only accept a 5-digit Number
+
+    //CVV (only validated if payment method is 'credit card')
+      //should only accept a number 3 digits long
 
   //Create a single master validation function
+    //call validator functions
+document.querySelector('form').addEventListener('submit', (e) => {
 
+
+});
 
 
 
