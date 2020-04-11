@@ -116,6 +116,16 @@ document.querySelector('#credit-card').selected=true;
   //get value of the payment select element and store in variable
 const payment = document.getElementById('payment');
 
+/*Here I set the value of the payment drop down/select menu to credit card.
+without adding the code below "payment.value='credit card'", the option which reads
+"Select Payment Method" is shown, although the credit card fields are still displayed.
+I am assuming this is what the project calls for, but this was extremely confusing,
+as the "Overview of Project 3" video did not do this (the page loads with the
+"Select Payment Method" in the payment drop down menu) despite the project guidelines
+and study guide saying otherwise.
+*/
+payment.value = 'credit card';
+
   /*if value of payment is equal to 'credit card',
   set credit card payment section to show, and hide the other 2 options
   repeat for bitcoin and paypal*/
@@ -337,15 +347,36 @@ document.querySelector('form').addEventListener('submit', (e) => {
   }
 });
 
-
-
-
-
-
-
 //Extra Credit
   //T-Shirt Section
     //Hide the color label and select menu until a design has been selected
+const colorSection = document.querySelector("#colors-js-puns")
+colorSection.hidden=true;
+designField.addEventListener('change', (e) => {
+  if(event.target.value==="js puns" || event.target.value==="heart js"){
+    colorSection.hidden=false;
+  }else{
+    colorSection.hidden=true;
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Conditional Error Messages
     //Program one of your error messages so that more info is provided depending on the error
   //Real-Time Error messages
