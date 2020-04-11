@@ -22,7 +22,6 @@ jobSelect.addEventListener('change', (event) => {
   }
 });
 
-
 //T-Shirt Section
 
   //Onload, update "Design" and "Color" fields so the user selects a theme before color
@@ -107,9 +106,7 @@ activitiesField.addEventListener('change', (event) => {
   }
 });
 
-
 //Payment Section
-
   //hide the "select payment" option
 document.querySelector('option[value="select method"]').hidden=true;
   //hide paypal and bitcoin options
@@ -149,20 +146,6 @@ payment.addEventListener('change', (event) => {
 }});
 
 //Form Validation and Validation Messages
-
-  //create separate validation functions for each of the required form fields/sections
-    //creating each validator function
-      /*before starting, create and append an element to the DOM near the
-      specific input or section, and give it some friendly error message.
-      */
-      //use a conditional to check if input value meets the required regex
-        //if criteria are NOT met
-          //set newDOMelement.hidden=false
-          //return false
-        //if criteria ARE met,
-          //set newDOMelement.hidden=true
-          //return true
-
   //Name
     //select #name and declare name variable
 const name = document.querySelector('#name');
@@ -187,7 +170,6 @@ const nameValidator = () => {
     return false;
   }
 }
-
 
   //email
     //select #name and declare name variable
