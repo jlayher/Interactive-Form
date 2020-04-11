@@ -236,11 +236,6 @@ const activitiesValidator = () => {
     }
 }
 
-  //IF CREDIT CARD SELECTED
-    //Credit Card Number
-      //only accept a number between 13-16 digits
-
-
 //global variables to select credit card inputs
 const cardNumberInput = document.getElementById('cc-num');
 const zipInput = document.getElementById('zip');
@@ -256,7 +251,8 @@ cardNumberError.hidden=true;
 //cardNumber Regexes (includes extra credit regexes for conditional errors)
 const cardNumberRegex= /^\d{13,16}$/;
 const cardNumberShortRegex = /^\d{0,12}$/;
-const cardNumberLongRegex = /^\d{17}$/;
+const cardNumberLongRegex = /^\d{17}(\d*)?$/;
+
 //cardNumber validator function
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumberInput.value;
@@ -264,24 +260,36 @@ const cardNumberValidator = () => {
     cardNumberInput.style.borderColor = "white";
     cardNumberError.hidden=true;
     return true;
-  }else{
-    if(cardNumberShortRegex.test(cardNumberValue)){
+  }else if(cardNumberShortRegex.test(cardNumberValue)){
       cardNumberInput.style.borderColor = "red";
       cardNumberError.textContent=`The credit card number provided is less
       than 13 digits.  Please enter a valid credit card number
       between 13-16 digits`;
       cardNumberError.hidden=false;
       return false;
-    }else if (cardNumberLongRegex.test(cardNumberValue)) {
-      cardNumberError.textContent=`the credit card number provided is more
+  }else if (cardNumberLongRegex.test(cardNumberValue)) {
+      cardNumberError.textContent=`The credit card number provided is more
       than 16 digits.  Please enter a valid credit card number
       between 13-16 digits`;
       cardNumberInput.style.borderColor = "red";
       cardNumberError.hidden=false;
       return false;
-    }
+  }else{
+      cardNumberError.textContent=`Invalid credit card number.  Make sure to
+      input 13-16 digits with only numbers`;
+      cardNumberInput.style.borderColor = "red";
+      cardNumberError.hidden=false;
+      return false;
   }
 }
+//if user changes payment method after getting errors for credit card
+payment.addEventListener('change', (e) => {
+  if(payment.value==='paypal' || payment.value==='bitcoin'){
+    cardNumberError.hidden=true;
+    zipError.hidden=true;
+    cvvError.hidden=true;
+  }
+});
 
 //create and append zip code error message
 const zipError = document.createElement('span');
@@ -292,6 +300,7 @@ zipError.hidden=true;
 
 //Zip Code Regex
 const zipRegex= /^\d{5}$/;
+
 //Zip Code validator function
 const zipValidator = () => {
   let zipValue = zipInput.value;
@@ -315,6 +324,7 @@ cvvError.hidden=true;
 
 //CVV Regex
 const cvvRegex= /^\d{3}$/;
+
 //CVV validator function
 const cvvValidator = () => {
   let cvvValue = cvvInput.value;
@@ -329,9 +339,7 @@ const cvvValidator = () => {
   }
 }
 
-
-//real time error Messages
-
+//Extra Credit: real time error Messages
 email.addEventListener('keyup', (e) => {
   let emailVal = email.value;
   if(emailRegex.test(emailVal)){
@@ -344,9 +352,6 @@ email.addEventListener('keyup', (e) => {
     return false;
   }
 });
-
-
-
 
   //Create a single master validation function
     //call validator functions
@@ -397,24 +402,3 @@ designField.addEventListener('change', (e) => {
     colorSection.hidden=true;
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //Real-Time Error messages
-    //Rather than an error message on submit, check for errors as they are being input
