@@ -1,5 +1,9 @@
 /*
 John Layher's JavaScript Project 3
+I would like to be graded in regards to the "Exceeds Expectations" criteria.
+If my project does not meet the requirements for the "Exceeds Expectations" grade
+I would like to give this project another shot.  I would like my project to be
+rejected in the case that my work does not "Exceed Expectations".
 */
 
 //Put the first field in the focus state
@@ -184,6 +188,7 @@ const nameValidator = () => {
   }
 }
 
+
   //email
     //select #name and declare name variable
 const email = document.querySelector('#mail');
@@ -248,8 +253,10 @@ document.querySelector('label[for="payment"]').append(cardNumberError);
 cardNumberError.classList.add('crediterror');
 cardNumberError.hidden=true;
 
-//cardNumber Regex
+//cardNumber Regexes (includes extra credit regexes for conditional errors)
 const cardNumberRegex= /^\d{13,16}$/;
+const cardNumberShortRegex = /^\d{0,12}$/;
+const cardNumberLongRegex = /^\d{17}$/;
 //cardNumber validator function
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumberInput.value;
@@ -258,9 +265,21 @@ const cardNumberValidator = () => {
     cardNumberError.hidden=true;
     return true;
   }else{
-    cardNumberInput.style.borderColor = "red";
-    cardNumberError.hidden=false;
-    return false;
+    if(cardNumberShortRegex.test(cardNumberValue)){
+      cardNumberInput.style.borderColor = "red";
+      cardNumberError.textContent=`The credit card number provided is less
+      than 13 digits.  Please enter a valid credit card number
+      between 13-16 digits`;
+      cardNumberError.hidden=false;
+      return false;
+    }else if (cardNumberLongRegex.test(cardNumberValue)) {
+      cardNumberError.textContent=`the credit card number provided is more
+      than 16 digits.  Please enter a valid credit card number
+      between 13-16 digits`;
+      cardNumberInput.style.borderColor = "red";
+      cardNumberError.hidden=false;
+      return false;
+    }
   }
 }
 
@@ -309,6 +328,25 @@ const cvvValidator = () => {
     return false;
   }
 }
+
+
+//real time error Messages
+
+email.addEventListener('keyup', (e) => {
+  let emailVal = email.value;
+  if(emailRegex.test(emailVal)){
+    email.style.borderColor = "white";
+    emailError.hidden=true;
+    return true;
+  }else{
+    email.style.borderColor = "red";
+    emailError.hidden=false;
+    return false;
+  }
+});
+
+
+
 
   //Create a single master validation function
     //call validator functions
@@ -377,7 +415,6 @@ designField.addEventListener('change', (e) => {
 
 
 
-  //Conditional Error Messages
-    //Program one of your error messages so that more info is provided depending on the error
+
   //Real-Time Error messages
     //Rather than an error message on submit, check for errors as they are being input
