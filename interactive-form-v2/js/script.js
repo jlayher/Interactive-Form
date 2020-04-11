@@ -5,10 +5,8 @@ If my project does not meet the requirements for the "Exceeds Expectations" grad
 I would like to give this project another shot.  I would like my project to be
 rejected in the case that my work does not "Exceed Expectations".
 */
-
 //Put the first field in the focus state
 document.getElementById('name').focus();
-
 //Add an "Other" option to Job Roles Section(in HTML) and Hide it on Page Load
 const otherTextBox = document.getElementById('other-title');
 otherTextBox.hidden = true;
@@ -21,11 +19,8 @@ jobSelect.addEventListener('change', (event) => {
     otherTextBox.hidden = true;
   }
 });
-
 //T-Shirt Section
-
-  //Onload, update "Design" and "Color" fields so the user selects a theme before color
-    //declare global variables
+  //declare global variables
 const designField = document.querySelector('#design');
 const colorField = document.querySelector('#color');
   //hide the "select theme" `option` in the design menu
@@ -40,7 +35,6 @@ for (let i = 0; i < allColorOptions.length; i++) {
   allColorOptions[i].hidden = true;
   selectShirtOp.selected = true;
 };
-
 //When a theme is selected, show available color options only
 designField.addEventListener('change', (event) => {
     if (event.target.value === "js puns") {
@@ -64,12 +58,10 @@ designField.addEventListener('change', (event) => {
           document.querySelector('[value=steelblue]').hidden= false;
           document.querySelector('[value=dimgrey]').hidden= false;
       //update the Color field to the first available color
-      document.querySelector("[value='tomato']").selected= true;
+          document.querySelector("[value='tomato']").selected= true;
     }
 });
-
 //Activity Section
-
     //select the activities field and store in global var
 const activitiesField = document.querySelector('.activities');
     //select all of the activity checkbox inputs and store in global variable
@@ -81,7 +73,6 @@ let totalCostSpan = document.createElement('span');
 totalCostSpan.textContent = "Total:" + " $" + cost;
     //append totalCost to activities section
 document.querySelector('.activities').append(totalCostSpan);
-
   //Listening for changes in the activity Section
 activitiesField.addEventListener('change', (event) => {
   let clicked = event.target;
@@ -105,7 +96,6 @@ activitiesField.addEventListener('change', (event) => {
     }
   }
 });
-
 //Payment Section
   //hide the "select payment" option
 document.querySelector('option[value="select method"]').hidden=true;
@@ -116,7 +106,6 @@ document.querySelector('#bitcoin').hidden=true;
 document.querySelector('#credit-card').selected=true;
   //get value of the payment select element and store in variable
 const payment = document.getElementById('payment');
-
 /*Here I set the value of the payment drop down/select menu to credit card.
 without adding the code below "payment.value='credit card'", the option which reads
 "Select Payment Method" is shown, although the credit card fields are still displayed.
@@ -126,7 +115,6 @@ as the "Overview of Project 3" video did not do this (the page loads with the
 and study guide saying otherwise.
 */
 payment.value = 'credit card';
-
   /*if value of payment is equal to 'credit card',
   set credit card payment section to show, and hide the other 2 options
   repeat for bitcoin and paypal*/
@@ -144,7 +132,6 @@ payment.addEventListener('change', (event) => {
     document.querySelector('#credit-card').hidden=true;
     document.querySelector('#paypal').hidden=false;
 }});
-
 //Form Validation and Validation Messages
   //Name
     //select #name and declare name variable
@@ -170,9 +157,8 @@ const nameValidator = () => {
     return false;
   }
 }
-
   //email
-    //select #name and declare name variable
+    //select #mail and declare email variable
 const email = document.querySelector('#mail');
     //regex for testing email
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -217,24 +203,20 @@ const activitiesValidator = () => {
       return false;
     }
 }
-
 //global variables to select credit card inputs
 const cardNumberInput = document.getElementById('cc-num');
 const zipInput = document.getElementById('zip');
 const cvvInput = document.getElementById('cvv');
-
 //create and append cardNumber error message
 const cardNumberError = document.createElement('span');
 cardNumberError.textContent = "Please enter a valid credit card number (13-16 digits)";
 document.querySelector('label[for="payment"]').append(cardNumberError);
 cardNumberError.classList.add('crediterror');
 cardNumberError.hidden=true;
-
 //cardNumber Regexes (includes extra credit regexes for conditional errors)
 const cardNumberRegex= /^\d{13,16}$/;
 const cardNumberShortRegex = /^\d{0,12}$/;
 const cardNumberLongRegex = /^\d{17}(\d*)?$/;
-
 //cardNumber validator function
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumberInput.value;
@@ -272,17 +254,14 @@ payment.addEventListener('change', (e) => {
     cvvError.hidden=true;
   }
 });
-
 //create and append zip code error message
 const zipError = document.createElement('span');
 zipError.textContent = "Please enter a valid zip code (5 digits)";
 document.querySelector('label[for="payment"]').append(zipError);
 zipError.classList.add('crediterror');
 zipError.hidden=true;
-
 //Zip Code Regex
 const zipRegex= /^\d{5}$/;
-
 //Zip Code validator function
 const zipValidator = () => {
   let zipValue = zipInput.value;
@@ -296,17 +275,14 @@ const zipValidator = () => {
     return false;
   }
 }
-
 //create and append CVV error message
 const cvvError = document.createElement('span');
 cvvError.textContent = "Please enter a valid CVV (3 digits)";
 document.querySelector('label[for="payment"]').append(cvvError);
 cvvError.classList.add('crediterror');
 cvvError.hidden=true;
-
 //CVV Regex
 const cvvRegex= /^\d{3}$/;
-
 //CVV validator function
 const cvvValidator = () => {
   let cvvValue = cvvInput.value;
@@ -320,8 +296,7 @@ const cvvValidator = () => {
     return false;
   }
 }
-
-//Extra Credit: real time error Messages
+//Extra Credit: real time error Messages for EMAIL
 email.addEventListener('keyup', (e) => {
   let emailVal = email.value;
   if(emailRegex.test(emailVal)){
@@ -334,7 +309,6 @@ email.addEventListener('keyup', (e) => {
     return false;
   }
 });
-
   //Create a single master validation function
     //call validator functions
 document.querySelector('form').addEventListener('submit', (e) => {
@@ -373,7 +347,6 @@ document.querySelector('form').addEventListener('submit', (e) => {
 });
 
 //Extra Credit
-  //T-Shirt Section
     //Hide the color label and select menu until a design has been selected
 const colorSection = document.querySelector("#colors-js-puns")
 colorSection.hidden=true;
