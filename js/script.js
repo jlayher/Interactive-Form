@@ -1,16 +1,16 @@
-/*
-John Layher's JavaScript Project 3
-I would like to be graded in regards to the "Exceeds Expectations" criteria.
-If my project does not meet the requirements for the "Exceeds Expectations" grade
-I would like to give this project another shot.  I would like my project to be
-rejected in the case that my work does not "Exceed Expectations".
-*/
+/* Interactive-Form Project */
+
 //Put the first field in the focus state
 document.getElementById('name').focus();
-//Add an "Other" option to Job Roles Section(in HTML) and Hide it on Page Load
+
+/* Job Role Other Textbox */
+//Select Other Textbox
 const otherTextBox = document.getElementById('other-title');
+
+//Hide the Text Box on Page Load
 otherTextBox.hidden = true;
-//Show the "Other" text field when "other" is selected in the Job Roles menu
+
+//Show the Other Textbox when "Other" is selected in the Job Roles menu
 const jobSelect = document.getElementById('title');
 jobSelect.addEventListener('change', (event) => {
   if (event.target.value === "other") {
@@ -19,23 +19,14 @@ jobSelect.addEventListener('change', (event) => {
     otherTextBox.hidden = true;
   }
 });
-//T-Shirt Section
-  //declare global variables
-const designField = document.querySelector('#design');
-const colorField = document.querySelector('#color');
-  //hide the "select theme" `option` in the design menu
+
+/* T-Shirt Section */
+
+//hide the "select theme" `option` in the design menu
 document.querySelector("#design option").hidden=true;
-  //update the "Color" field to read "Please select a T-Shirt theme"
-const selectShirtOp = document.createElement('option');
-selectShirtOp.text = "Please select a T-Shirt theme";
-colorField.prepend(selectShirtOp);
-  //Hide the colors in the "color" drop down menu
-const allColorOptions = document.querySelectorAll('#color option');
-for (let i = 0; i < allColorOptions.length; i++) {
-  allColorOptions[i].hidden = true;
-  selectShirtOp.selected = true;
-};
+
 //When a theme is selected, show available color options only
+const designField = document.querySelector('#design');
 designField.addEventListener('change', (event) => {
     if (event.target.value === "js puns") {
       //hide heart options
@@ -61,20 +52,35 @@ designField.addEventListener('change', (event) => {
           document.querySelector("[value='tomato']").selected= true;
     }
 });
-//Activity Section
-    //select the activities field and store in global var
+
+//Hide the color label and select menu until a design has been selected
+const colorSection = document.querySelector("#colors-js-puns")
+colorSection.hidden=true;
+designField.addEventListener('change', (e) => {
+  if(e.target.value==="js puns" || e.target.value==="heart js"){
+    colorSection.hidden=false;
+  }else{
+    colorSection.hidden=true;
+  }
+});
+
+/* Activity Section */
+
+//select the activities field and store in variable
 const activitiesField = document.querySelector('.activities');
-    //select all of the activity checkbox inputs and store in global variable
+//select all of the activity checkbox inputs and store in variable
 const checkboxes = document.querySelectorAll('.activities input');
-    //declare variable cost=0 to act as total counter
+//declare variable cost=0 to act as total counter
 let cost = 0;
-    //create span element and assign its text content to "Total: + var cost"
+//create span element and assign its text content to "Total: + var cost"
 let totalCostSpan = document.createElement('span');
 totalCostSpan.textContent = "Total:" + " $" + cost;
-    //append totalCost to activities section
+//append totalCost to activities section
 document.querySelector('.activities').append(totalCostSpan);
-  //Listening for changes in the activity Section
+
+//Listening for changes in the activity Section
 activitiesField.addEventListener('change', (event) => {
+  //Calculate Cost
   let clicked = event.target;
   let clickedCost = parseInt(clicked.getAttribute('data-cost'));
   if (clicked.checked) {
@@ -96,21 +102,26 @@ activitiesField.addEventListener('change', (event) => {
     }
   }
 });
-//Payment Section
-  //hide the "select payment" option
+
+/* Payment Section */
+
+//hide the "select payment" option
 document.querySelector('option[value="select method"]').hidden=true;
-  //hide paypal and bitcoin options
+
+//hide paypal and bitcoin divs
 document.querySelector('#paypal').hidden=true;
 document.querySelector('#bitcoin').hidden=true;
-  //select the credit card option on load
+
+//select the credit card option on load
 document.querySelector('#credit-card').selected=true;
-  //get value of the payment select element and store in variable
+
+//store the payment select element in a variable
 const payment = document.getElementById('payment');
-//Here I set the value of the payment drop down/select menu to credit card.
+
+//set the value of the payment select menu to credit card
 payment.value = 'credit card';
-  /*if value of payment is equal to 'credit card',
-  set credit card payment section to show, and hide the other 2 options
-  repeat for bitcoin and paypal*/
+  
+//if payment.value changes, update the divs' hidden props
 payment.addEventListener('change', (event) => {
   if (event.target.value==='credit card'){
     document.querySelector('#paypal').hidden=true;
@@ -125,27 +136,29 @@ payment.addEventListener('change', (event) => {
     document.querySelector('#credit-card').hidden=true;
     document.querySelector('#paypal').hidden=false;
 }});
-//Form Validation and Validation Messages
-  //Name
-    //select #name and declare name variable
-const name = document.querySelector('#name');
-    //create and append an error message to the DOM
+
+
+/* Form Validation and Validation Messages */
+//Name
+//select #name and declare name variable
+const nameInput = document.querySelector('#name');
+//create and append an error message to the DOM
 const nameError = document.createElement('span');
 nameError.textContent = "Please enter your name";
 document.querySelector('label[for="name"]').append(nameError);
 nameError.classList.add('error');
-    //set the error message .hidden=true initially
+//set the error message .hidden=true initially
 nameError.hidden=true;
-    //validation:  the name field can't be blank
+//validation:  the name field can't be blank
 const nameValidator = () => {
-  let nameVal = name.value;
+  let nameVal = nameInput.value;
   if (nameVal.length > 0) {
     //show/hide warning and chage border colors
-    name.style.borderColor = "white";
+    nameInput.style.borderColor = "white";
     nameError.hidden=true;
     return true;
   }else{
-    name.style.borderColor = "red";
+    nameInput.style.borderColor = "red";
     nameError.hidden=false;
     return false;
   }
@@ -196,157 +209,3 @@ const activitiesValidator = () => {
       return false;
     }
 }
-//global variables to select credit card inputs
-const cardNumberInput = document.getElementById('cc-num');
-const zipInput = document.getElementById('zip');
-const cvvInput = document.getElementById('cvv');
-//create and append cardNumber error message
-const cardNumberError = document.createElement('span');
-cardNumberError.textContent = "Please enter a valid credit card number (13-16 digits)";
-document.querySelector('label[for="payment"]').append(cardNumberError);
-cardNumberError.classList.add('crediterror');
-cardNumberError.hidden=true;
-//cardNumber Regexes (includes extra credit regexes for conditional errors)
-const cardNumberRegex= /^\d{13,16}$/;
-const cardNumberShortRegex = /^\d{0,12}$/;
-const cardNumberLongRegex = /^\d{17}(\d*)?$/;
-//cardNumber validator function
-const cardNumberValidator = () => {
-  let cardNumberValue = cardNumberInput.value;
-  if(cardNumberRegex.test(cardNumberValue)){
-    cardNumberInput.style.borderColor = "white";
-    cardNumberError.hidden=true;
-    return true;
-  }else if(cardNumberShortRegex.test(cardNumberValue)){
-      cardNumberInput.style.borderColor = "red";
-      cardNumberError.textContent=`The credit card number provided is less
-      than 13 digits.  Please enter a valid credit card number
-      between 13-16 digits`;
-      cardNumberError.hidden=false;
-      return false;
-  }else if (cardNumberLongRegex.test(cardNumberValue)) {
-      cardNumberError.textContent=`The credit card number provided is more
-      than 16 digits.  Please enter a valid credit card number
-      between 13-16 digits`;
-      cardNumberInput.style.borderColor = "red";
-      cardNumberError.hidden=false;
-      return false;
-  }else{
-      cardNumberError.textContent=`Invalid credit card number.  Make sure to
-      input 13-16 digits with only numbers`;
-      cardNumberInput.style.borderColor = "red";
-      cardNumberError.hidden=false;
-      return false;
-  }
-}
-//if user changes payment method after getting errors for credit card
-payment.addEventListener('change', (e) => {
-  if(payment.value==='paypal' || payment.value==='bitcoin'){
-    cardNumberError.hidden=true;
-    zipError.hidden=true;
-    cvvError.hidden=true;
-  }
-});
-//create and append zip code error message
-const zipError = document.createElement('span');
-zipError.textContent = "Please enter a valid zip code (5 digits)";
-document.querySelector('label[for="payment"]').append(zipError);
-zipError.classList.add('crediterror');
-zipError.hidden=true;
-//Zip Code Regex
-const zipRegex= /^\d{5}$/;
-//Zip Code validator function
-const zipValidator = () => {
-  let zipValue = zipInput.value;
-  if(zipRegex.test(zipValue)){
-    zipInput.style.borderColor = "white";
-    zipError.hidden=true;
-    return true;
-  }else{
-    zipInput.style.borderColor = "red";
-    zipError.hidden=false;
-    return false;
-  }
-}
-//create and append CVV error message
-const cvvError = document.createElement('span');
-cvvError.textContent = "Please enter a valid CVV (3 digits)";
-document.querySelector('label[for="payment"]').append(cvvError);
-cvvError.classList.add('crediterror');
-cvvError.hidden=true;
-//CVV Regex
-const cvvRegex= /^\d{3}$/;
-//CVV validator function
-const cvvValidator = () => {
-  let cvvValue = cvvInput.value;
-  if(cvvRegex.test(cvvValue)){
-    cvvInput.style.borderColor = "white";
-    cvvError.hidden=true;
-    return true;
-  }else{
-    cvvInput.style.borderColor = "red";
-    cvvError.hidden=false;
-    return false;
-  }
-}
-//Extra Credit: real time error Messages for EMAIL
-email.addEventListener('keyup', (e) => {
-  let emailVal = email.value;
-  if(emailRegex.test(emailVal)){
-    email.style.borderColor = "white";
-    emailError.hidden=true;
-    return true;
-  }else{
-    email.style.borderColor = "red";
-    emailError.hidden=false;
-    return false;
-  }
-});
-  //Create a single master validation function
-    //call validator functions
-document.querySelector('form').addEventListener('submit', (e) => {
-  nameValidator();
-  if (!nameValidator()){
-    e.preventDefault();
-    console.log("name validator prevented submission");
-  }
-  emailValidator();
-  if (!emailValidator()){
-    e.preventDefault();
-    console.log("email validator prevented submission");
-  }
-  activitiesValidator();
-  if (!activitiesValidator()){
-    e.preventDefault();
-    console.log("activities validator prevented submission");
-  }
-  if(payment.value==='credit card'){
-    cardNumberValidator();
-    if (!cardNumberValidator()){
-      e.preventDefault();
-      console.log("cardNumber validator prevented submission");
-    }
-    zipValidator();
-    if (!zipValidator()){
-      e.preventDefault();
-      console.log("zip code validator prevented submission");
-    }
-    cvvValidator();
-    if (!cvvValidator()){
-      e.preventDefault();
-      console.log("cvv validator prevented submission");
-    }
-  }
-});
-
-//Extra Credit
-    //Hide the color label and select menu until a design has been selected
-const colorSection = document.querySelector("#colors-js-puns")
-colorSection.hidden=true;
-designField.addEventListener('change', (e) => {
-  if(event.target.value==="js puns" || event.target.value==="heart js"){
-    colorSection.hidden=false;
-  }else{
-    colorSection.hidden=true;
-  }
-});
