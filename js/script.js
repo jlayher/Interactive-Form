@@ -139,16 +139,20 @@ payment.addEventListener('change', (event) => {
 
 
 /* Form Validation and Validation Messages */
-//Name
+
+  /*Name*/
 //select #name and declare name variable
 const nameInput = document.querySelector('#name');
+
 //create and append an error message to the DOM
 const nameError = document.createElement('span');
 nameError.textContent = "Please enter your name";
 document.querySelector('label[for="name"]').append(nameError);
 nameError.classList.add('error');
+
 //set the error message .hidden=true initially
 nameError.hidden=true;
+
 //validation:  the name field can't be blank
 const nameValidator = () => {
   let nameVal = nameInput.value;
@@ -163,18 +167,22 @@ const nameValidator = () => {
     return false;
   }
 }
-  //email
-    //select #mail and declare email variable
+
+  /*Email*/
+//select #mail and declare email variable
 const email = document.querySelector('#mail');
-    //regex for testing email
+
+//regex for testing email
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    //create and append an error message to the DOM
+
+//create and append an error message to the DOM
 const emailError = document.createElement('span');
 emailError.textContent = "Please provide a valid email address";
 document.querySelector('label[for="mail"]').append(emailError);
 emailError.classList.add('error');
 emailError.hidden=true;
-    //email validator function
+
+//email validator function
 const emailValidator = () => {
   let emailVal = email.value;
   if(emailRegex.test(emailVal)){
@@ -187,25 +195,25 @@ const emailValidator = () => {
     return false;
   }
 }
-  //activity section
+  /*Activity Section*/
 const activitiesError = document.createElement('span');
 activitiesError.textContent = "Please select at least one activity";
 document.querySelector('.activities legend').append(activitiesError);
 activitiesError.classList.add('error');
 activitiesError.hidden=true;
-    //activities validator function
+
+//activities validator function
 const activitiesValidator = () => {
   let activitiesChecked=0;
-  const allCheckboxes = document.querySelectorAll("input[type='checkbox']");
-  for(let i=0; i<allCheckboxes.length; i++){
-    if(allCheckboxes[i].checked){
+  for(let i=0; i<checkboxes.length; i++){
+    if(checkboxes[i].checked){
       activitiesChecked += 1;
-    }}
-    if(activitiesChecked>0){
-      activitiesError.hidden=true;
-      return true;
-    }else{
-      activitiesError.hidden=false;
-      return false;
-    }
-}
+    }};
+  if(activitiesChecked>0){
+    activitiesError.hidden=true;
+    return true;
+  }else{
+    activitiesError.hidden=false;
+    return false;
+  }
+};

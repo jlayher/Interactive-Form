@@ -1,17 +1,22 @@
+
+    /*Payment*/
 //global variables to select credit card inputs
 const cardNumberInput = document.getElementById('cc-num');
 const zipInput = document.getElementById('zip');
 const cvvInput = document.getElementById('cvv');
+
 //create and append cardNumber error message
 const cardNumberError = document.createElement('span');
 cardNumberError.textContent = "Please enter a valid credit card number (13-16 digits)";
 document.querySelector('label[for="payment"]').append(cardNumberError);
 cardNumberError.classList.add('crediterror');
 cardNumberError.hidden=true;
-//cardNumber Regexes (includes extra credit regexes for conditional errors)
+
+//cardNumber Regexes
 const cardNumberRegex= /^\d{13,16}$/;
 const cardNumberShortRegex = /^\d{0,12}$/;
 const cardNumberLongRegex = /^\d{17}(\d*)?$/;
+
 //cardNumber validator function
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumberInput.value;
@@ -41,6 +46,7 @@ const cardNumberValidator = () => {
       return false;
   }
 }
+
 //if user changes payment method after getting errors for credit card
 payment.addEventListener('change', (e) => {
   if(payment.value==='paypal' || payment.value==='bitcoin'){
@@ -49,14 +55,17 @@ payment.addEventListener('change', (e) => {
     cvvError.hidden=true;
   }
 });
+
 //create and append zip code error message
 const zipError = document.createElement('span');
 zipError.textContent = "Please enter a valid zip code (5 digits)";
 document.querySelector('label[for="payment"]').append(zipError);
 zipError.classList.add('crediterror');
 zipError.hidden=true;
+
 //Zip Code Regex
 const zipRegex= /^\d{5}$/;
+
 //Zip Code validator function
 const zipValidator = () => {
   let zipValue = zipInput.value;
@@ -70,14 +79,17 @@ const zipValidator = () => {
     return false;
   }
 }
+
 //create and append CVV error message
 const cvvError = document.createElement('span');
 cvvError.textContent = "Please enter a valid CVV (3 digits)";
 document.querySelector('label[for="payment"]').append(cvvError);
 cvvError.classList.add('crediterror');
 cvvError.hidden=true;
+
 //CVV Regex
 const cvvRegex= /^\d{3}$/;
+
 //CVV validator function
 const cvvValidator = () => {
   let cvvValue = cvvInput.value;
@@ -91,8 +103,9 @@ const cvvValidator = () => {
     return false;
   }
 }
-//Extra Credit: real time error Messages for EMAIL
-email.addEventListener('keyup', (e) => {
+
+//Real Time Error Messages for EMAIL
+email.addEventListener('blur', (e) => {
   let emailVal = email.value;
   if(emailRegex.test(emailVal)){
     email.style.borderColor = "white";
@@ -104,8 +117,8 @@ email.addEventListener('keyup', (e) => {
     return false;
   }
 });
-  //Create a single master validation function
-    //call validator functions
+
+//Call Validator Functions Upon Submission
 document.querySelector('form').addEventListener('submit', (e) => {
   nameValidator();
   if (!nameValidator()){
