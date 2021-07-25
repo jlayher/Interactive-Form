@@ -1,9 +1,13 @@
-# JS Project 3
- JS Project 3 Forms
+# Interactive-Form App
 
- John Layher's JavaScript Project 3
- I would like to be graded in regards to the "Exceeds Expectations"
- criteria.  If my project does not meet the requirements for the "Exceeds
- Expectations" grade, I would like to give this project another shot.  I
- would like my project to be rejected in the case that my work does not
- meet all of the "Exceeds Expectations" requirements.
+In this project, I used JavaScript to enhance an interactive registration form for a fictional "FullStack Conference."  
+
+To assist with user-friendliness, I added:
+- custom conditional behavior and interactivity to form elements
+- dynamic changes reactive to user input
+- validation checks on user inputs to ensure the form was filled out correctly and that no signed up events coincided
+- real time error messages.
+
+To run this program, drag and drop the index.html file into your local browser.
+
+The HTML and CSS files for this project were provided by Team Treehouse
